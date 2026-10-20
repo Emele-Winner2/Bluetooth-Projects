@@ -1,6 +1,6 @@
-# ESP32 Bluetooth A2DP Audio Receiver
+# ESP32 Bluetooth Speaker
 
-A Bluetooth audio receiver built using an ESP32, the **ESP32-A2DP** library, and **Arduino Audio Tools**. The project receives wireless stereo audio from a smartphone or computer using Bluetooth Advanced Audio Distribution Profile (A2DP) and routes the audio to an analog output for an external amplifier and speaker system.
+A Bluetooth Speaker built using an ESP32, the **ESP32-A2DP** library, and **Arduino Audio Tools**. The project receives wireless stereo audio from a smartphone or computer using Bluetooth Advanced Audio Distribution Profile (A2DP) and routes the audio to an analog output for an external amplifier and speaker system.
 
 The goal is to explore Bluetooth audio streaming, digital-to-analog conversion (DAC), audio signal paths, and hardware integration while building a foundation for a custom Bluetooth speaker (Although Arduino IDE abstracts lots of stuff 😭😭)
 
