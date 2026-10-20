@@ -1,7 +1,7 @@
 #include <Wire.h>
 #include <SPI.h>
 #include <Adafruit_BMP280.h>
-
+#include <BLE2902.h>
 #include <Arduino.h>
 #include <BLEDevice.h>
 #include <BLEUtils.h>
@@ -11,7 +11,6 @@
 // https://www.uuidgenerator.net/
 
 #define SERVICE_UUID "4fafc201-1fb5-459e-8fcc-c5c9c331914b"
-#define CHARACTERISTIC2_UUID "fff9b58b-612b-4851-ac5e-c9518605b125"
 #define CHARACTERISTIC_UUID "beb5483e-36e1-4688-b7f5-ea07361b26a8"
 
 #define BMP_SCK (13)
@@ -21,7 +20,6 @@
 
 Adafruit_BMP280 bmp;  // I2C
 BLECharacteristic *pCharacteristic;
-BLECharacteristic *pCharacteristic2;
 void setup() {
   Serial.begin(9600);
   while (!Serial) delay(100);  // wait for native usb
@@ -58,12 +56,9 @@ void setup() {
   BLEService *pService = pServer->createService(SERVICE_UUID);
   pServer->advertiseOnDisconnect(true);
   pCharacteristic =
-    pService->createCharacteristic(CHARACTERISTIC_UUID, BLECharacteristic::PROPERTY_NOTIFY);
-  pCharacteristic2 =
-    pService->createCharacteristic(CHARACTERISTIC2_UUID, BLECharacteristic::PROPERTY_READ | BLECharacteristic::PROPERTY_WRITE);
-
-  pCharacteristic2->setValue("Hello World says Neil");
-
+    pService->createCharacteristic(CHARACTERISTIC_UUID,  BLECharacteristic::PROPERTY_READ |
+    BLECharacteristic::PROPERTY_NOTIFY);
+  pCharacteristic->addDescriptor(new BLE2902());
   pService->start();
   // BLEAdvertising *pAdvertising = pServer->getAdvertising();  // this still is working for backward compatibility
   BLEAdvertising *pAdvertising = BLEDevice::getAdvertising();
@@ -82,15 +77,24 @@ void loop() {
   snprintf(message, sizeof(message),
            "Temperature = %.2f C",
            bmp.readTemperature());
+  Serial.println(message); 
   pCharacteristic->setValue(message);
   pCharacteristic->notify();
 
   snprintf(message, sizeof(message),
-           "Pressure : %d Pa",
+           "Pressure = %.2f Pa",
            bmp.readPressure());
+  Serial.println(message); 
   pCharacteristic->setValue(message);
   pCharacteristic->notify();
 
+  snprintf(message, sizeof(message),
+           "Approx altitude =  %.2f m",
+           bmp.readAltitude(1013.25));
+  Serial.println(message); 
+  pCharacteristic->setValue(message);
+  pCharacteristic->notify();
   Serial.println();
-  delay(2000);
+
+  delay(500);
 }
