@@ -47,7 +47,7 @@ void setup() {
   }
   Serial.println("Starting BLE work!");
 
-  if (!BLEDevice::init("BLE Server Example")) {
+  if (!BLEDevice::init("BLE Environmental Monitor")) {
     Serial.println("BLE initialization failed!");
     return;
   }
