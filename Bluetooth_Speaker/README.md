@@ -2,7 +2,7 @@
 
 A Bluetooth audio receiver built using an ESP32, the **ESP32-A2DP** library, and **Arduino Audio Tools**. The project receives wireless stereo audio from a smartphone or computer using Bluetooth Advanced Audio Distribution Profile (A2DP) and routes the audio to an analog output for an external amplifier and speaker system.
 
-The goal is to explore Bluetooth audio streaming, digital-to-analog conversion (DAC), audio signal paths, and hardware integration while building a foundation for a custom Bluetooth speaker.
+The goal is to explore Bluetooth audio streaming, digital-to-analog conversion (DAC), audio signal paths, and hardware integration while building a foundation for a custom Bluetooth speaker (Although Arduino IDE abstracts lots of stuff 😭😭)
 
 ## Features
 
@@ -126,38 +126,4 @@ The ESP32's audio output is intended to provide an audio signal, not enough powe
 - Avoid connecting a speaker directly to a DAC output.
 - Keep analog audio wiring short and away from noisy switching power circuitry where practical.
 
-If your selected ESP32 board does not have a suitable internal DAC, use an external DAC or supported I²S audio output interface instead.
-
-## Concepts Explored
-
-- Bluetooth Classic and A2DP
-- Bluetooth audio sink architecture
-- Audio streaming and decoding
-- Digital and analog audio signal paths
-- DAC operation
-- Audio amplifier interfacing
-- Speaker impedance and amplifier power
-- Embedded library integration
-- Hardware-software integration and debugging
-
-## Future Improvements
-
-- [ ] Verify and document the exact ESP32 board and analog output pins.
-- [ ] Add a volume-control mechanism.
-- [ ] Add physical buttons for playback control.
-- [ ] Integrate an external DAC or I²S audio codec if required.
-- [ ] Select and integrate an appropriate audio amplifier.
-- [ ] Design a dedicated PCB for the audio circuitry.
-- [ ] Add power-supply filtering and noise-reduction measures.
-- [ ] Build a compact enclosure for a complete Bluetooth speaker.
-- [ ] Measure frequency response, distortion, and output power.
-
-## Project Goal
-
-This project is part of my hands-on exploration of computer engineering, focusing on wireless communication, embedded audio, analog electronics, and hardware integration.
-
-The long-term goal is to develop a working Bluetooth speaker system and understand the complete path from wireless audio reception to amplified sound reproduction.
-
-## License
-
-Add an open-source license, such as MIT, if you want to formally permit reuse and redistribution of this project.
+NOTE: Your ESP32 board will require an internal DAC for this project to work.
